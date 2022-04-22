@@ -19,23 +19,30 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          textTheme: TextTheme(
-            headline1: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.w100,
-            ),
-            headline2: TextStyle(
-              fontSize: 27,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff0C1A30),
-            ),
+        primarySwatch: Colors.indigo,
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            fontSize: 50,
+            fontWeight: FontWeight.w100,
           ),
-          inputDecorationTheme: InputDecorationTheme(
-              fillColor: Color(0xffc4c5c4),
-              filled: true,
-              border: InputBorder.none),
-              ),
+          headline2: TextStyle(
+            fontSize: 27,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff0C1A30),
+          ),
+          bodyText1: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText2: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+            fillColor: Color(0xffc4c5c4),
+            filled: true,
+            border: InputBorder.none),
+      ),
       home: const Splash(),
     );
   }
