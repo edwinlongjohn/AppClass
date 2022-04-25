@@ -11,6 +11,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Map<String, dynamic>> products = [
+    {
+      'title': "Freedpods",
+      'price': 20000,
+      'image': 'assets/images/p1.png',
+      'reviews': {'star': 5.0, 'count': 20}
+    },
+    {
+      'title': "Drilling Machine",
+      'price': 50000.000,
+      'image': 'assets/images/p2.png',
+      'reviews': {'star': 4.5, 'count': 20}
+    },
+    {
+      'title': "Oraimo EarPiece",
+      'price': 2000,
+      'image': 'assets/images/p3.png',
+      'reviews': {'star': 4.0, 'count': 20}
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,18 +128,75 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 40,
               ),
-              
+
               Container(
                 width: 400,
-                height:300,
+                height: 270,
                 child: ListView.builder(
-                  itemBuilder:((context, index){
-                   return Text("$index");
+                  scrollDirection: Axis.horizontal,
+                  itemCount: products.length,
+                  itemBuilder: ((context, index) {
+                    return SizedBox(
+                      width: 180,
+                      child: Card(
+                        margin: EdgeInsets.all(10),
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Image.asset(products[index]['image']),
+                              ),
+                              Text(
+                                products[index]['title'],
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "NGN ${products[index]['price']}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.copyWith(
+                                      color: Colors.red,
+                                    ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.star,
+                                      size: 13, color: Colors.yellow[800]),
+                                  Expanded(
+                                    child: Text(
+                                      '${products[index]['reviews']['star']}',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Text(
+                                      "${products[index]['reviews']['count']} Reviews",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.more_vert,
+                                    size: 15,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
                   }),
-                  ),
-                  ),
-             
-
+                ),
+              ),
 
               // Container(
               //   width: 400,
