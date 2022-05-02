@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shopa_app/splash_screen.dart';
+import 'package:shopa_app/ui/Account/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           ),
           bodyText2: TextStyle(
             fontSize: 16,
+            color: Color(0xff0C1A30),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
             filled: true,
             border: InputBorder.none),
       ),
-      home: const Splash(),
+      home:  Home(),
     );
   }
 }
