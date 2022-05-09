@@ -1,14 +1,58 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shopa_app/models/product_response.dart';
+
+class Dashboard extends StatefulWidget {
+  Dashboard({
     Key? key,
-    required this.products,
   }) : super(key: key);
 
-  final List<Map<String, dynamic>> products;
+  List<Map<String, dynamic>> products = [
+    {
+      'title': 'Freepods',
+      'image': 'assets/images/p1.png',
+      'price': 20000,
+      'reviews': {'star': 5.0, 'count': 10}
+    },
+    {
+      'title': 'Screwdriver',
+      'image': 'assets/images/p2.png',
+      'price': 30000,
+      'reviews': {'star': 5.0, 'count': 20}
+    },
+    {
+      'title': 'Beats by Dre',
+      'image': 'assets/images/p3.png',
+      'price': 80000,
+      'reviews': {'star': 5.0, 'count': 50}
+    },
+  ];
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  Future<List<ProductsResponse>> getProducts() async {
+    List<ProductsResponse> allProducts;
+    print('loading');
+    var url = Uri.parse('https://fakestoreapi.com/products');
+    var response = await http.get(url);
+    List result = jsonDecode(response.body);
+    allProducts =
+        (result).map((dynamic e) => ProductsResponse.fromJson(e)).toList();
+    print(allProducts[0].title);
+    return allProducts;
+  }
+
+  @override
+  void initState() {
+    getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +132,12 @@ class Dashboard extends StatelessWidget {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Expanded(
-                    child: Text(
-                      "Categories",
-                      style: TextStyle(color: Color(0xff0C1A30)),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(color: Color(0xff0C1A30)),
+                      ),
                     ),
                   ),
                   Text(
@@ -151,70 +198,31 @@ class Dashboard extends StatelessWidget {
             Container(
               width: 400,
               height: 270,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                itemBuilder: ((context, index) {
-                  return SizedBox(
-                    width: 180,
-                    child: Card(
-                      margin: EdgeInsets.all(10),
-                      elevation: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Image.asset(products[index]['image']),
-                            ),
-                            Text(
-                              products[index]['title'],
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "NGN ${products[index]['price']}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  ?.copyWith(
-                                    color: Colors.red,
-                                  ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.star,
-                                    size: 13, color: Colors.yellow[800]),
-                                Expanded(
-                                  child: Text(
-                                    '${products[index]['reviews']['star']}',
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    "${products[index]['reviews']['count']} Reviews",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.more_vert,
-                                  size: 15,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-              ),
+              child: FutureBuilder(
+                  future: getProducts(),
+                  //the snapshot takes datas like
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.connectionState ==
+                            ConnectionState.done &&
+                        snapshot.hasError) {
+                      Text('an error occured');
+                    }
+                    List<ProductsResponse> allProducts = snapshot.data;
+                   
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: allProducts.length,
+                      itemBuilder: ((context, i) {
+                        final product = allProducts[i];
+                        return SizedBox(
+                          width: 180,
+                          child: ProductWidget(product: product),
+                        );
+                      }),
+                    );
+                  }),
             ),
 
             // Container(
@@ -315,7 +323,7 @@ class Dashboard extends StatelessWidget {
               height: 270,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: products.length,
+                itemCount: widget.products.length,
                 itemBuilder: ((context, index) {
                   return SizedBox(
                     width: 180,
@@ -328,15 +336,16 @@ class Dashboard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Center(
-                              child: Image.asset(products[index]['image']),
+                              child:
+                                  Image.asset(widget.products[index]['image']),
                             ),
                             Text(
-                              products[index]['title'],
+                              widget.products[index]['title'],
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
                             SizedBox(height: 10),
                             Text(
-                              "NGN ${products[index]['price']}",
+                              "NGN ${widget.products[index]['price']}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2
@@ -353,14 +362,14 @@ class Dashboard extends StatelessWidget {
                                     size: 13, color: Colors.yellow[800]),
                                 Expanded(
                                   child: Text(
-                                    '${products[index]['reviews']['star']}',
+                                    '${widget.products[index]['reviews']['star']}',
                                     style: TextStyle(fontSize: 14),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 3,
                                   child: Text(
-                                    "${products[index]['reviews']['count']} Reviews",
+                                    "${widget.products[index]['reviews']['count']} Reviews",
                                     style: TextStyle(fontSize: 14),
                                   ),
                                 ),
@@ -476,7 +485,7 @@ class Dashboard extends StatelessWidget {
                         ],
                       ),
                       trailing:
-                          Image.asset("assets/images/house.png", width: 10),
+                          Image.asset("assets/images/house.png", width: 50),
                     ),
                   ),
                 );
@@ -531,6 +540,79 @@ class Dashboard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final ProductsResponse product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 50,
+              child: Center(
+                child: Image.network(product.image ?? ''),
+              ),
+            ),
+            Text(
+              '${product.title}',
+              maxLines: 2,
+              style:
+                  Theme.of(context).textTheme.bodyText1,
+            ),
+            SizedBox(height: 10),
+            Text(
+              "NGN ${product.price}",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  ?.copyWith(
+                    color: Colors.red,
+                  ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Icon(Icons.star,
+                    size: 13, color: Colors.yellow[800]),
+                Expanded(
+                  child: Text(
+                    '${product.rating}',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
+                // Expanded(
+                //   flex: 3,
+                //   child: Text(
+                //     "${product.rating?.count}",
+                //     style: TextStyle(fontSize: 14),
+                //   ),
+                // ),
+                Icon(
+                  Icons.more_vert,
+                  size: 15,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

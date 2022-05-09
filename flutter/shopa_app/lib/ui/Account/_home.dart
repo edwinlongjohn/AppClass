@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: Dashboard(products: products),
+      body: Dashboard(),
     );
   }
 }
