@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
       backgroundColor: Colors.grey[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -53,7 +53,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      )),
+      ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
