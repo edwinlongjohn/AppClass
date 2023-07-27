@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sneakers_ecommerce/components/bottom_nav_bar.dart';
+import 'package:sneakers_ecommerce/pages/all_products.dart';
 import 'package:sneakers_ecommerce/pages/cart_page.dart';
 import 'package:sneakers_ecommerce/pages/shop_page.dart';
 //import 'package:sneakers_ecommerce/pages/intro_page.dart';
@@ -28,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     const ShopPage(),
     //cart page
     const CartPage(),
+    //all products page
+    const AllProducts(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -48,9 +51,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        backgroundColor: Colors.grey,
-        shadowColor: const Color(0xFF494949),
-        title: const Text('home Page'),
+        backgroundColor: Colors.transparent,
+        //shadowColor: const Color(0xFF494949),
+        //title: const Text('home Page'),
       ),
       drawer: Drawer(
         backgroundColor: Colors.grey[900],

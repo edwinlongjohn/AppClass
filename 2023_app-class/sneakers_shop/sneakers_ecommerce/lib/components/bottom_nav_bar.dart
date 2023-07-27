@@ -8,7 +8,7 @@ class MyBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: GNav(
           mainAxisAlignment: MainAxisAlignment.center,
           color: Colors.grey[400],
@@ -25,6 +25,10 @@ class MyBottomNavBar extends StatelessWidget {
             GButton(
               icon: Icons.shopping_bag_rounded,
               text: 'Cart',
+            ),
+            GButton(
+              icon: Icons.shop,
+              text: 'Products',
             ),
           ]),
     );
