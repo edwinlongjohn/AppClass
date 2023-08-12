@@ -10,7 +10,7 @@ class MyShoeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //padding: EdgeInsets.all(8),
-      margin: EdgeInsets.only(left: 25),
+      margin: EdgeInsets.only(left: 15),
       width: 280,
       decoration: BoxDecoration(
         color: Colors.grey[100],
@@ -53,7 +53,7 @@ class MyShoeTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Text('\$' + shoe.price),
+                  Text(shoe.price),
                 ]),
                 //button to add to cart
                 GestureDetector(
