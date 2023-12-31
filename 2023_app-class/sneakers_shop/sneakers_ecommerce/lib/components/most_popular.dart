@@ -5,7 +5,7 @@ class MostPopular extends StatefulWidget {
   //image header_text sub-text price and rating
   final Shoe shoe;
   void Function()? onPressed;
-   MostPopular({
+  MostPopular({
     super.key,
     required this.shoe,
     required this.onPressed,
@@ -19,7 +19,8 @@ class _MostPopularState extends State<MostPopular> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
@@ -37,11 +38,13 @@ class _MostPopularState extends State<MostPopular> {
         children: [
           //image
           Container(
-            padding: EdgeInsets.all(10.0),
-            width: 60,
-            height: 60,
+            padding: const EdgeInsets.all(10.0),
+            constraints: const BoxConstraints.expand(
+              height: 80.0,
+              width: 80.0,
+            ),
             decoration: BoxDecoration(
-              color: Color(0xffF0EAFF),
+              color: Color(widget.shoe.color),
               borderRadius: BorderRadius.circular(15.0),
               boxShadow: const [
                 BoxShadow(
@@ -51,39 +54,40 @@ class _MostPopularState extends State<MostPopular> {
                 ),
               ],
             ),
-            child: Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                'lib/images/ai_nike.jpg',
-                height: 200.0,
+                widget.shoe.imagePath,
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //header text
               Text(
-                'Gel Lyte III OG Wisteria',
+                widget.shoe.name,
                 textAlign: TextAlign.start,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14.0,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               //sub-text
               Text(
-                'ASICS',
+                widget.shoe.description,
                 textAlign: TextAlign.start,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 12.0,
                   color: Color(0xFF999CA1),
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
 
               //add-ons
               Row(
@@ -91,24 +95,24 @@ class _MostPopularState extends State<MostPopular> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '\$130.00',
-                    style: TextStyle(
+                    widget.shoe.price,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Color(0xffFFC107),
                         size: 15,
                       ),
                       Text(
-                        '5.0',
-                        style: TextStyle(
+                        widget.shoe.rating,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 12.0,
                           color: Color(0xFF999CA1),

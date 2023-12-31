@@ -259,12 +259,12 @@ class _ShopPageState extends State<ShopPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: ListView.builder(
-                itemCount: 1,
+                itemCount: value.getMostPopularShoes().length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  Shoe shoe = value.getShoeList()[index];
+                  Shoe shoe = value.getMostPopularShoes()[index];
                   return MostPopular(
-                    shoe:shoe,
+                    shoe: shoe,
                     onPressed: () {
                       addShoeToCart(shoe);
                     },

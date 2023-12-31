@@ -3,11 +3,16 @@ class Shoe {
   final String price;
   final String imagePath;
   final String description;
+  final String rating;
+  final int color;
 
   Shoe({
     required this.name,
     required this.price,
     required this.imagePath,
-    required this.description,
+    this.description= '',
+    this.rating = '',
+    this.color = 0,
+    
   });
 }

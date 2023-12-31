@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sneakers_ecommerce/components/bottom_nav_bar.dart';
 import 'package:sneakers_ecommerce/pages/all_products.dart';
 import 'package:sneakers_ecommerce/pages/cart_page.dart';
+import 'package:sneakers_ecommerce/pages/category_page.dart';
 import 'package:sneakers_ecommerce/pages/shop_page.dart';
 //import 'package:sneakers_ecommerce/pages/intro_page.dart';
 
@@ -27,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     //shop page
     const ShopPage(),
+    //category page
+    CategoryPage(),
     //cart page
     const CartPage(),
     //all products page
