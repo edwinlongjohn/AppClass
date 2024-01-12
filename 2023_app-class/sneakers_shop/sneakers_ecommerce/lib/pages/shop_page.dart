@@ -141,20 +141,23 @@ class _ShopPageState extends State<ShopPage> {
                         ),
                         const SizedBox(
                           height: 20,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 8, bottom: 8, left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Color(0xFFFDB447),
-                          ),
-                          child: const Text(
-                            'Get',
-                            style: TextStyle(
-                              color: Colors.white,
-                              //fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                        ), 
+                        GestureDetector
+                      (
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                top: 8, bottom: 8, left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color(0xFFFDB447),
+                            ),
+                            child: const Text(
+                              'Get',
+                              style: TextStyle(
+                                color: Colors.white,
+                                //fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         )

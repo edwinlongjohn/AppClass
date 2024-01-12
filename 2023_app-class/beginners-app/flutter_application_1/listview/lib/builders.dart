@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listview/cards.dart';
 
 class Builders extends StatelessWidget {
   const Builders({Key? key}) : super(key: key);
@@ -20,18 +21,26 @@ class Builders extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return const Card(
+                  return Card(
                     elevation: 5,
                     child: ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.verified_user,
                         size: 50,
                         color: Colors.orangeAccent,
                       ),
                       title: Text('LongJohn Edwin Edward'),
                       subtitle: Text('User'),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios_rounded,
+                      trailing: IconButton(
+                        onPressed: () {
+                          // Callback function when the button is pressed
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: ((context) => Cards()),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.arrow_forward_ios_rounded),
                         color: Colors.black,
                       ),
                     ),

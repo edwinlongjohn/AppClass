@@ -10,17 +10,16 @@ class MyCard extends StatelessWidget {
   final String chipImage;
   final String cardTypeImage;
   final color;
-  const MyCard(
-      {Key? key,
-      required this.balance,
-      required this.cardNumber,
-      required this.expiryMonth,
-      required this.expiryYear,
-      required this.color,
-      required this.chipImage,
-      required this.cardTypeImage,
-      })
-      : super(key: key);
+  const MyCard({
+    Key? key,
+    required this.balance,
+    required this.cardNumber,
+    required this.expiryMonth,
+    required this.expiryYear,
+    required this.color,
+    required this.chipImage,
+    required this.cardTypeImage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

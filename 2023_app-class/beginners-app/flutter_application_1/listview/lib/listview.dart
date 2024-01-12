@@ -22,7 +22,6 @@ class ListViewApp extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
-                Text('hello'),
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                   child: ElevatedButton(
@@ -132,10 +131,10 @@ class ListViewApp extends StatelessWidget {
             GridView.count(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 2,
-              crossAxisCount: 4,
-              childAspectRatio: 4 / 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 15,
+              crossAxisCount: 2,
+              childAspectRatio: 4 / 3,
               children: <Widget>[
                 CircleAvatar(
                   child: Icon(Icons.abc_rounded),

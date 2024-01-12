@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listview/builders.dart';
 import 'package:listview/listview.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const ListViewApp(),
+      home: const Builders(),
       debugShowCheckedModeBanner: false,
     );
   }
